@@ -1,0 +1,14 @@
+name = "ernisto/ci_cd"
+version = "0.1.0"
+description = "utilities to write ci_cd luau scripts"
+authors = ["ernisto"]
+repository = "https://github.com/ernisto/ci-cd"
+license = "MIT"
+
+workspace_members = ["pkg/*"]
+
+[target]
+environment = "lune"
+
+[indices]
+default = "https://github.com/pesde-pkg/index"
