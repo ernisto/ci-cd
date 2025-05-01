@@ -6,7 +6,10 @@ repository = "https://github.com/ernisto/semantic-git"
 license = "MIT"
 
 includes = [
-    "src/**/*.luau",
+    "config/**/*.luau",
+    "utils/**/*.luau",
+    "lib/**/*.luau",
+    "cli/**/*.luau",
     "pesde.toml",
     "README.md",
     "LICENSE",
@@ -15,8 +18,8 @@ includes = [
 
 [target]
 environment = "lune"
-lib = "src/lib/init.luau"
-bin = "src/cli/init.luau"
+lib = "lib/init.luau"
+bin = "cli/init.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"

@@ -6,7 +6,8 @@ repository = "https://github.com/ernisto/git"
 license = "MIT"
 
 includes = [
-    "src/**/*.luau",
+    "utils/**/*.luau",
+    "lib/**/*.luau",
     "pesde.toml",
     "README.md",
     "LICENSE",
@@ -15,7 +16,7 @@ includes = [
 
 [target]
 environment = "lune"
-lib = "src/init.luau"
+lib = "lib/init.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"

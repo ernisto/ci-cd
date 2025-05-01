@@ -1,4 +1,4 @@
-local version = require('@utils/version')
+local version = require('version')
 export type version = version.version
 
 local commit = require('commit')

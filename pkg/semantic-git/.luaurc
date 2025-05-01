@@ -1,9 +1,9 @@
 {
     "aliases": {
         "pkg": "./lune_packages",
-        "config": "./src/config",
-        "utils": "./src/utils",
-        "cli": "./src/cli",
-        "lib": "./src/lib"
+        "config": "./config",
+        "utils": "./utils",
+        "cli": "./cli",
+        "lib": "./lib"
     }
 }

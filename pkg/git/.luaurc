@@ -1,7 +1,7 @@
 {
     "aliases": {
         "pkg": "./lune_packages",
-        "utils": "./src/utils",
-        "lib": "./src"
+        "utils": "./utils",
+        "lib": "./lib"
     }
 }
