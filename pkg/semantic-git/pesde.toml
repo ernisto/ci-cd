@@ -15,16 +15,11 @@ includes = [
 
 [target]
 environment = "lune"
-build_files = ["src"]
 lib = "src/lib/init.luau"
 bin = "src/cli/init.luau"
-
-[dev_dependencies]
-luau_lsp = { name = "pesde/luau_lsp", version = "^1.39.0", target = "lune" }
-stylua = { name = "pesde/stylua", version = "^2.0.2", target = "lune" }
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
 
 [dependencies]
-git = { name = "ernisto/git", version = "^0.1.0-alpha.8" }
+git = { workspace = "ernisto/git" }
