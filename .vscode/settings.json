@@ -10,7 +10,7 @@
     // files
     "files.eol": "\n",
     "files.readonlyInclude": {
-        "*_packages/**": true,
+        "**/*_packages/**": true,
         ".pesde/**": true,
 
         "sourcemap.json": true,
@@ -44,7 +44,7 @@
     "luau-lsp.fflags.enableNewSolver": false,
     "luau-lsp.diagnostics.workspace": true,
     "luau-lsp.ignoreGlobs": [
-        "*_packages/**",
+        "**/*_packages/**",
         "dist/**"
     ],
     "luau-lsp.completion.imports.ignoreGlobs": [
