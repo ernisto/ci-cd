@@ -1,4 +1,4 @@
-local get_tree_child_by_path = require('tree_child_by_path')
+local get_tree_child_by_path = require('@self/tree_child_by_path')
 local index = require('@lib/index')
 local types = require('@lib/types')
 

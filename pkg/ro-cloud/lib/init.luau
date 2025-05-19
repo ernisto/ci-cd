@@ -1,3 +1,3 @@
 return table.freeze {
-	auth = require('auth'),
+	auth = require('@self/auth'),
 }

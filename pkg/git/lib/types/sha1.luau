@@ -3,7 +3,7 @@
     It is used to uniquely identify objects within a repository.
 ]]
 
-local u32 = require('u32')
+local u32 = require('@self/u32')
 
 -- defs
 local SHA1_SIZE = u32.size * 5

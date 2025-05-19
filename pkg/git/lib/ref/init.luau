@@ -2,7 +2,7 @@ local read_descendant_paths = require('@utils/read_descendant_paths')
 local future = require('@pkg/future')
 local fs = require('@lune/fs')
 
-local pack = require('pack')
+local pack = require('@self/pack')
 local warns = require('@lib/warns')
 
 local types = require('@lib/types')

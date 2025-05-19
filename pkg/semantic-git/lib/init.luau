@@ -1,12 +1,12 @@
-local version = require('version')
+local version = require('@self/version')
 export type version = version.version
 
-local commit = require('commit')
+local commit = require('@self/commit')
 export type commit = commit.semantic_commit
 
 local placeholder_env = require('@config/env')
-local changelog = require('changelog')
-local branch = require('branch')
+local changelog = require('@self/changelog')
+local branch = require('@self/branch')
 
 -- module
 return table.freeze {

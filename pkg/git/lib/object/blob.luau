@@ -1,4 +1,4 @@
-local object = require('init')
+local object = require('@self/init')
 local types = require('@lib/types')
 
 -- constructor

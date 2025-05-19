@@ -1,17 +1,17 @@
 local file = require('@utils/file')
 
 -- primitives
-local c_str = require('c_str')
+local c_str = require('@self/c_str')
 export type luau_str = c_str.luau_str
 export type c_str = c_str.c_str
 
-local sha1 = require('sha1')
+local sha1 = require('@self/sha1')
 export type sha1 = sha1.sha1
 
-local u32 = require('u32')
+local u32 = require('@self/u32')
 export type u32 = u32.u32
 
-local u16 = require('u16')
+local u16 = require('@self/u16')
 export type u16 = u16.u16
 
 -- misc

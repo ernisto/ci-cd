@@ -1,4 +1,4 @@
-local semver = require('version')
+local semver = require('@self/version')
 
 print(semver.parse('1.2.3-alpha.beta.3.cavalo+build.sha.349F8D04AB'))
 

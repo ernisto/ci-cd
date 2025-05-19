@@ -1,5 +1,5 @@
 local file = require('@utils/file')
-local bit_flags = require('bit_flags')
+local bit_flags = require('@self/bit_flags')
 
 local types = require('@lib/types')
 local c_str = types.c_str

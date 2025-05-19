@@ -2,7 +2,7 @@ local serde = require('@lune/serde')
 local fs = require('@lune/fs')
 
 local types = require('@lib/types')
-local pack = require('pack')
+local pack = require('@self/pack')
 
 export type raw_object = string
 

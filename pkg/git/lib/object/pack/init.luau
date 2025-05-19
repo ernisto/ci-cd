@@ -1,6 +1,6 @@
 local types = require('@lib/types')
-local index = require('index')
-local data = require('data')
+local index = require('@self/index')
+local data = require('@self/data')
 
 -- functions
 local function read_object_id(object_id: types.sha1): (string, types.object_kind)

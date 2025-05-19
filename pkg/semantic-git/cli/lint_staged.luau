@@ -23,7 +23,7 @@ for _, entry in staged_file_entries do
 
 	read_or_create(temp_file, blob.content)
 
-	process.spawn('stylua', { temp_file }, {})
+	process.create('stylua', { temp_file }, {})
 	table.insert(luau_staged_file_paths, entry.path)
 end
 

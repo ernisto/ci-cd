@@ -4,7 +4,7 @@ local types = require('@lib/types')
 local u32 = types.u32
 type u32 = types.u32
 
-local index_entry = require('entry')
+local index_entry = require('@self/entry')
 export type entry = index_entry.entry
 
 -- defs

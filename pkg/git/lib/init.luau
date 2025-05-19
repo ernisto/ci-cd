@@ -1,5 +1,5 @@
 local types = require('@lib/types')
-local index = require('index')
+local index = require('@self/index')
 
 export type user = types.user
 export type sha1 = types.sha1
@@ -20,18 +20,18 @@ export type blob = types.blob
 
 -- module
 return table.freeze({
-	object = require('object'),
-	commit = require('object/commit'),
-	tree = require('object/tree'),
-	blob = require('object/blob'),
+	object = require('@self/object'),
+	commit = require('@self/object/commit'),
+	tree = require('@self/object/tree'),
+	blob = require('@self/object/blob'),
 
-	ref = require('ref'),
-	remote = require('ref/remote'),
-	head = require('ref/head'),
-	tag = require('ref/tag'),
+	ref = require('@self/ref'),
+	remote = require('@self/ref/remote'),
+	head = require('@self/ref/head'),
+	tag = require('@self/ref/tag'),
 
-	index = require('index'),
-	query = require('query'),
-	user = require('user'),
-	mock = require('mock'),
+	index = require('@self/index'),
+	query = require('@self/query'),
+	user = require('@self/user'),
+	mock = require('@self/mock'),
 })

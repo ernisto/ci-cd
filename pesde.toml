@@ -7,6 +7,10 @@ license = "MIT"
 
 workspace_members = ["pkg/*"]
 
+[engines]
+pesde = "^0.7.0-rc.3"
+lune = "^0.9.3"
+
 [target]
 environment = "lune"
 
