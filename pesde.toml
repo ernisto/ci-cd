@@ -9,10 +9,14 @@ workspace_members = ["pkg/*"]
 
 [engines]
 pesde = "^0.7.0-rc.3"
-lune = "^0.9.3"
+lune = "^0.8.9"
 
 [target]
 environment = "lune"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
+
+[dev_dependencies]
+stylua = { name = "pesde/stylua", version = "^2.1.0" }
+luau_lsp = { name = "pesde/luau_lsp", version = "^1.47.0" }
