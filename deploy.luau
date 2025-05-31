@@ -36,8 +36,7 @@ local env = semantic_git.placeholder_env:extends {
 }
 semantic_git.changelog.write(env, 'CHANGELOG.md')
 
-local session = rocloud.auth.login()
--- rocloud.experience.publish(session, "cavalo.rbxl")
+local session = rocloud.auth.api.login(api_key, {})
 
 print('new_version', semver.tostring(new_version or prev_version), new_version or prev_version)
 
