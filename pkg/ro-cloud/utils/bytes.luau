@@ -1,8 +1,9 @@
 -- functions
 local function from_hex_str(hex_str: string): buffer
-	local buf = buffer.create(#hex_str)
-	for i = 1, #hex_str do
-		buffer.writeu8(buf, i - 1, string.byte(hex_str, i))
+	local buf = buffer.create(#hex_str / 2)
+	for offset = 0, #hex_str / 2 - 1 do
+		local hex_byte = hex_str:sub(1 + offset * 2, 2 + offset * 2)
+		buffer.writeu8(buf, offset, tonumber(hex_byte, 16) or error('invalid hex string'))
 	end
 	return buf
 end
