@@ -34,7 +34,7 @@ local function request(
 			['Cookie'] = `.ROBLOSECURITY={session.cookie}`,
 		},
 	})
-	assert(response.ok and response.statusCode == 200, `HTTP [{response.statusCode}]: ` .. response.statusMessage)
+	assert(response.ok and response.statusCode == 200, `HTTP [{response.statusCode}]: {response.statusMessage}`)
 	return response.body
 end
 

@@ -4,10 +4,9 @@ local net = require('@lune/net')
 export type session = { api_key: string }
 
 -- functions
-local function login(api_key: string, permissions: { string }): session
+local function login(api_key: string): session
 	return table.freeze {
 		api_key = api_key,
-		permissions = permissions,
 	}
 end
 
@@ -29,7 +28,7 @@ local function request(
 			['x-api-key'] = session.api_key,
 		},
 	})
-	assert(response.ok and response.statusCode == 200, `HTTP [{response.statusCode}]: ` .. response.statusMessage)
+	assert(response.ok and response.statusCode == 200, `HTTP [{response.statusCode}]: {response.statusMessage}`)
 	return response.body
 end
 
