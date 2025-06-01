@@ -19,3 +19,6 @@ lib = "lib/init.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
+
+[dependencies]
+base64 = { name = "synpixel/base64", version = "^3.0.1" }
