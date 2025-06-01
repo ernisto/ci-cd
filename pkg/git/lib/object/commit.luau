@@ -1,5 +1,5 @@
 local destruct_captures = require('@utils/destruct_captures')
-local object = require('.')
+local object = require('../object')
 
 local types = require('@lib/types')
 local user = require('@lib/user')

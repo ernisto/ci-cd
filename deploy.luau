@@ -1,6 +1,6 @@
-local git = require('pkg/git/lib')
-local rocloud = require('pkg/ro-cloud/lib')
-local semantic_git = require('pkg/semantic-git/lib')
+local git = require('./pkg/git/lib')
+local rocloud = require('./pkg/ro-cloud/lib')
+local semantic_git = require('./pkg/semantic-git/lib')
 local semver = semantic_git.version
 
 -- init
