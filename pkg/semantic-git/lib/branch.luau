@@ -15,8 +15,8 @@ local function get_prev_version(branch: git.head): (version.version?, { git.sha1
 		commit_id = branch.commit_id,
 		predicate = is_version_tag,
 	}
-	local tag = result.ref or error(`no version tag found`)
-	return version.parse(tag.name), result.later_commit_ids
+	local tag = result.ref
+	return tag and version.parse(tag.name), result.later_commit_ids
 end
 local function eval_update_level(commit_ids: { git.sha1 }): number?
 	local commits_by_kind = semantic_commit.index_commits_by_kind(commit_ids)
