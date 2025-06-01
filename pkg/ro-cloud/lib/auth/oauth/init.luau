@@ -4,6 +4,8 @@ local pkce = require('@self/pkce')
 local types = require('@self/types')
 
 -- defs
+local API_ENDPOINT = 'https://apis.roblox.com/'
+
 export type permission = types.permission
 export type session = types.session
 export type oauth_error = types.oauth_error
@@ -18,7 +20,7 @@ local function create_authorization_url(
 	local code_verifier = pkce.generate_code_verifier()
 	local code_challenge = pkce.generate_code_challenge.S256(code_verifier)
 
-	return types.AUTH
+	return (API_ENDPOINT .. 'oauth/v1/authorize')
 		.. `?client_id={client_id}`
 		.. `&code_challenge={code_challenge}`
 		.. `&code_challenge_method=S256`
@@ -58,7 +60,7 @@ local function exchange_code_for_token(
 	code_verifier: string
 ): session
 	local response = net.request({
-		url = types.TOKEN,
+		url = API_ENDPOINT .. 'oauth/v1/token',
 		method = 'POST',
 		headers = {
 			['Content-Type'] = 'application/x-www-form-urlencoded',
@@ -76,7 +78,7 @@ end
 
 local function refresh_token(client_id: string, client_secret: string, refresh_token: string): session
 	local response = net.request({
-		url = types.TOKEN,
+		url = API_ENDPOINT .. 'oauth/v1/token',
 		method = 'POST',
 		headers = {
 			['Content-Type'] = 'application/x-www-form-urlencoded',
@@ -105,7 +107,7 @@ local function request(
 	assert(not is_session_expired(session), 'Session has expired. Please refresh the token.')
 
 	local response = net.request({
-		url = types.API .. path,
+		url = API_ENDPOINT .. path,
 		method = method,
 		headers = {
 			['Authorization'] = `{session.token_type} {session.access_token}`,

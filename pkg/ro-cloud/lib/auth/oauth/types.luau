@@ -19,11 +19,4 @@ export type oauth_error = {
 	error_uri: string?,
 }
 
--- Endpoints
-local endpoints = {
-	AUTH = 'https://apis.roblox.com/oauth/v1/authorize',
-	TOKEN = 'https://apis.roblox.com/oauth/v1/token',
-	API = 'https://apis.roblox.com/',
-}
-
-return table.freeze(endpoints) 
+return nil
