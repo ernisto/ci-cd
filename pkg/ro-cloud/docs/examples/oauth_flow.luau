@@ -1,6 +1,6 @@
-local env = require('../../../utils/env')
-local oauth = require('../lib/auth/oauth')
-local auth = require('../lib/auth')
+local env = require('../../../../utils/env')
+local oauth = require('@lib/auth/oauth')
+local auth = require('@lib/auth')
 
 local serde = require('@lune/serde')
 local task = require('@lune/task')
