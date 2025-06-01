@@ -1,5 +1,4 @@
 return table.freeze {
-	auth = require('@self/auth'),
-	luau = require('@self/luau'),
+	place = require('@self/place'),
 	universe = require('@self/universe'),
 }
