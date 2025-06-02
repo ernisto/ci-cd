@@ -1,11 +1,13 @@
 {
-    "languageMode": "strict",
-    "globals": [
-        "warn"
-    ],
-    "aliases": {
-        "lune": "~/.lune/.typedefs/0.9.3/",
-        "pkg": "./lune_packages",
-        "utils": "./utils"
-    }
+  "aliases": {
+    "lib": "lib",
+    "lune": "~/.lune/.typedefs/0.9.3/",
+    "pkg": "pkg",
+    "utils": "./utils"
+  },
+  "globals": [
+    "warn"
+  ],
+  "languageMode": "strict",
+  "lint": {}
 }

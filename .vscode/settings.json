@@ -1,57 +1,54 @@
 {
-    // editor
-    "editor.formatOnSave": true,
-
-    // schemas
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.yml",
-    },
-
-    // files
-    "files.eol": "\n",
-    "files.readonlyInclude": {
-        "**/*_packages/**": true,
-        ".pesde/**": true,
-
-        "sourcemap.json": true,
-        "dist": true,
-
-        "*.lock": true,
-        "*.lock.*": false,
-    },
-    "files.exclude": {
-        "stylua.toml": true,
-        "pesde.toml": true,
-        "*_packages": true,
-        ".gitattributes": true,
-        ".gitignore": true,
-        ".github": true,
-        ".vscode": true,
-        ".luaurc": true,
-        ".pesde": true,
-        "*.lock": true,
-        "*.lock.*": true
-    },
-
-    // luau lsp
-    "stylua.targetReleaseVersion": "latest",
-    "luau-lsp.platform.type": "standard",
-    "luau-lsp.bytecode.vectorCtor": "create",
-    "luau-lsp.bytecode.vectorLib": "vector",
-    "luau-lsp.bytecode.vectorType": "vector",
-    "luau-lsp.completion.imports.requireStyle": "alwaysRelative",
-    "luau-lsp.completion.imports.stringRequires.enabled": true,
-    "luau-lsp.fflags.enableNewSolver": false,
-    "luau-lsp.diagnostics.workspace": true,
-    "luau-lsp.ignoreGlobs": [
-        "**/*_packages/**",
-        "dist/**"
-    ],
-    "luau-lsp.completion.imports.ignoreGlobs": [
-        "**/.pesde/**",
-        "benches/**",
-        "*.bench.luau",
-        "tests/**",
-        "*.spec.luau",
-    ],
+  "editor.formatOnSave": true,
+  "files.associations": {},
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/*-lock.*": true,
+    "**/*.lock": true,
+    "**/*.lock.*": true,
+    "**/*_packages/**": true,
+    "**/.luaurc": true,
+    "**/.pesde/**": true,
+    "**/pesde.toml": true,
+    "*-lock.*": true,
+    "*.lock": true,
+    "*.lock.*": true,
+    "*_packages/**": true,
+    ".gitattributes": true,
+    ".gitignore": true,
+    ".luaurc": true,
+    ".pesde/**": true,
+    ".vscode": true,
+    "pesde.toml": true,
+    "stylua.toml": true
+  },
+  "files.readonlyInclude": {
+    "**/*-lock.*": true,
+    "**/*.lock": true,
+    "**/*.lock.*": true,
+    "**/*_packages/**": true,
+    "**/.pesde/**": true,
+    "*-lock.*": true,
+    "*.lock": true,
+    "*.lock.*": true,
+    "*_packages/**": true,
+    ".pesde/**": true
+  },
+  "luau-lsp.bytecode.vectorCtor": "create",
+  "luau-lsp.bytecode.vectorLib": "vector",
+  "luau-lsp.bytecode.vectorType": "vector",
+  "luau-lsp.completion.imports.ignoreGlobs": [
+    "**/.pesde/**"
+  ],
+  "luau-lsp.completion.imports.requireStyle": "alwaysRelative",
+  "luau-lsp.completion.imports.stringRequires.enabled": true,
+  "luau-lsp.fflags.enableNewSolver": false,
+  "luau-lsp.ignoreGlobs": [
+    "**/.pesde/**",
+    "**/*_packages/**",
+    "**/.pesde/**",
+    "**/*_packages/**"
+  ],
+  "luau-lsp.platform.type": "standard",
+  "stylua.targetReleaseVersion": "latest"
 }
