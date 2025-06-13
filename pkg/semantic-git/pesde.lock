@@ -2,20 +2,20 @@
 # It is not intended for manual editing.
 format = 2
 name = "ernisto/semantic_git"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 target = "lune"
 
-[graph."ernisto/git@0.1.0-alpha.8 lune"]
+[graph."ernisto/git@0.1.0-alpha.9 lune"]
 direct = ["git", { workspace = "ernisto/git", version = "^" }, "standard"]
 
-[graph."ernisto/git@0.1.0-alpha.8 lune".dependencies]
+[graph."ernisto/git@0.1.0-alpha.9 lune".dependencies]
 future = ["lukadev_0/future@1.0.1 lune", "standard"]
 
-[graph."ernisto/git@0.1.0-alpha.8 lune".pkg_ref]
+[graph."ernisto/git@0.1.0-alpha.9 lune".pkg_ref]
 ref_ty = "workspace"
 path = "pkg/git"
 
-[graph."ernisto/git@0.1.0-alpha.8 lune".pkg_ref.dependencies]
+[graph."ernisto/git@0.1.0-alpha.9 lune".pkg_ref.dependencies]
 future = [{ name = "lukadev_0/future", version = "^1.0.1", index = "https://github.com/pesde-pkg/index", target = "lune" }, "standard"]
 
 [graph."lukadev_0/future@1.0.1 lune".dependencies]
