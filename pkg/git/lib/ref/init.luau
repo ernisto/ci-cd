@@ -1,5 +1,5 @@
 local read_descendant_paths = require('@utils/read_descendant_paths')
-local future = require('@pkg/future')
+local task = require('@lune/task')
 local fs = require('@lune/fs')
 
 local pack = require('@self/pack')
@@ -71,16 +71,20 @@ end
 
 local function read_all(): { [string]: types.ref }
 	local refs = table.clone(load_packeds().refs)
-	local futures = {}
-
 	local head_paths = read_descendant_paths('.git/refs', 'refs')
 	warns.so_many_ref_files(#head_paths)
 
+	local remaining = 0
 	for _, path in head_paths do
-		table.insert(futures, future.spawn(read_from_id, path))
+		remaining += 1
+		task.spawn(function()
+			local ref = read_from_id(path)
+			refs[ref.name] = ref
+			remaining -= 1
+		end)
 	end
-	for _, ref in future.all(futures):await() do
-		refs[ref.name] = ref
+	while remaining > 0 do
+		task.wait()
 	end
 	return refs
 end

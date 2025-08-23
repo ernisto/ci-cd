@@ -20,6 +20,3 @@ lib = "lib/init.luau"
 
 [indices]
 default = "https://github.com/pesde-pkg/index"
-
-[dependencies]
-future = { name = "lukadev_0/future", version = "^1.0.1", target = "lune" }

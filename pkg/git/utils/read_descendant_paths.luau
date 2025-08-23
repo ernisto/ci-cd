@@ -1,41 +1,36 @@
 local fs = require('@lune/fs')
-local future = require('@pkg/future')
+local task = require('@lune/task')
 
 export type path = string
+type ptr<T> = { T }
 
-local function read_descendants_paths(
-	path: string,
-	local_path: string,
-	out: { string },
-	futures: { future.Future<any> }
-)
+local function spawn_read_descendants_paths(path: string, local_path: string, out: { string }, remaining: ptr<number>)
 	for _, name in fs.readDir(path) do
-		table.insert(
-			futures,
-			future.spawn(function()
-				if fs.isFile(path .. '/' .. name) then
-					table.insert(out, local_path .. '/' .. name)
-				else
-					read_descendants_paths(path .. '/' .. name, local_path .. '/' .. name, out, futures)
-				end
-				return nil
-			end)
-		)
+		remaining[1] += 1
+		task.spawn(function()
+			if fs.isFile(path .. '/' .. name) then
+				table.insert(out, local_path .. '/' .. name)
+			else
+				spawn_read_descendants_paths(path .. '/' .. name, local_path .. '/' .. name, out, remaining)
+			end
+			remaining[1] -= 1
+		end)
 	end
-	return out
 end
 
-local function _read_descendants_paths(path: path, local_path: path?): { path }
+local function read_descendants_paths_handle(path: path, local_path: path?): { path }
 	local_path = local_path or ''
 	assert(local_path)
 
-	local futures = {}
+	local remaining = { 0 }
 	local out = {}
 
-	read_descendants_paths(path, local_path, out, futures)
-	future.all(futures):await()
+	spawn_read_descendants_paths(path, local_path, out, remaining)
+	while remaining[1] > 0 do
+		task.wait()
+	end
 
 	return out
 end
 
-return _read_descendants_paths
+return read_descendants_paths_handle
