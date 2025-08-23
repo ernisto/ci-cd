@@ -1,5 +1,5 @@
 local file = require('@utils/file')
-local object = require('@self/init')
+local object = require('../object')
 
 local types = require('@lib/types')
 local c_str = types.c_str
