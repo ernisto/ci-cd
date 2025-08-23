@@ -1,5 +1,5 @@
-local version = require('@self/version')
-export type version = version.version
+local semver = require('@lpkg/semver')
+export type version = semver.version
 
 local commit = require('@self/commit')
 export type commit = commit.semantic_commit
@@ -12,7 +12,7 @@ local branch = require('@self/branch')
 return table.freeze {
 	placeholder_env = placeholder_env,
 	changelog = changelog,
-	version = version,
+	version = semver,
 	branch = branch,
 	commit = commit,
 }

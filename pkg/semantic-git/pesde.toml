@@ -30,3 +30,4 @@ default = "https://github.com/pesde-pkg/index"
 
 [dependencies]
 git = { workspace = "ernisto/git" }
+semver = { name = "ernisto/semver", version = "^0.1.2", target = "luau" }

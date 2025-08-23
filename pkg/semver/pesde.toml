@@ -1,0 +1,15 @@
+name = "ernisto/semver"
+version = "0.1.2"
+license = "MIT"
+includes = ["lib.luau", "pesde.toml", "README.md", "LICENSE", ".luaurc"]
+
+[target]
+environment = "luau"
+lib = "lib.luau"
+
+[engines]
+pesde = "^0.7.0"
+lune = "^0.10.1"
+
+[indices]
+default = "https://github.com/pesde-pkg/index"

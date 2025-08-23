@@ -1,5 +1,5 @@
 local semantic_commit = require('@lib/commit')
-local version = require('@lib/version')
+local version = require('@lpkg/semver')
 local config = require('@config')
 local git = require('@pkg/git')
 

@@ -1,33 +1,76 @@
-local destruct_captures = require('@utils/destruct_captures')
-local regex = require('@lune/regex')
-
 -- defs
 export type raw_semver = string
-local pattern = regex.new(([[
-^v?(?P<major>0|[1-9]\d*)
-\.(?P<minor>0|[1-9]\d*)
-\.(?P<patch>0|[1-9]\d*)
-(?:-(?P<prerelease>
-    (?:0|[1-9]\d*|\d*[a-zA-Z][0-9a-zA-Z-]*)
-    (?:\.(?:0|[1-9]\d*|\d*[a-zA-Z][0-9a-zA-Z-]*))
-*))?
-(?:\+(?P<buildmetadata>[0-9a-zA-Z]+
-    (?:\.[0-9a-zA-Z]+)*
-))?$
-]]):gsub('%s', '') :: string)
-local schema = table.freeze {
-	major = 'major',
-	minor = 'minor',
-	patch = 'patch',
-	prerelease = 'prerelease',
-	buildmetadata = 'buildmetadata',
+
+export type version = {
+	major: number,
+	minor: number,
+	patch: number,
+	pre_release: { string }?,
+	build_metadata: { string }?,
+}
+
+export type partial_version = {
+	major: number?,
+	minor: number?,
+	patch: number?,
+	pre_release: { string }?,
+	build_metadata: { string }?,
 }
 
 -- functions
-local function is_valid(input: string): raw_semver?
-	return pattern:isMatch(input) and input or nil
+local function try_parse(input: string): version?
+	local major, minor, patch, remaining = input:match('^v?(%d+)%.(%d+)%.(%d+)(.*)')
+	if not remaining then return end
+
+	if not major or major:match('^0%d$') then return end
+	if not minor or minor:match('^0%d$') then return end
+	if not patch or patch:match('^0%d$') then return end
+
+	local major_num = tonumber(major)
+	local minor_num = tonumber(minor)
+	local patch_num = tonumber(patch)
+
+	if not major_num or not minor_num or not patch_num then return end
+
+	local pre_release
+	local build_metadata
+
+	local pre_release_str, next_remaining = remaining:match('^%-([^%+]+)(.*)')
+	if pre_release_str then
+		remaining = next_remaining
+		pre_release = pre_release_str:split('.')
+
+		for _, id in pre_release do
+			if #id == 0 then return end
+			if not id:match('^[%w%-]+$') then return end
+		end
+	end
+
+	local build_metadata_str = remaining:match('^%+(.*)')
+	if build_metadata_str then
+		build_metadata = string.split(build_metadata_str, '.')
+		remaining = ''
+		for _, id in build_metadata :: { string } do
+			if #id == 0 then return end
+			if not id:match('^[%w%-]+$') then return end
+		end
+	end
+
+	if remaining ~= '' then return end
+	return table.freeze {
+		major = major_num,
+		minor = minor_num,
+		patch = patch_num,
+		pre_release = pre_release,
+		build_metadata = build_metadata,
+	}
 end
+local function is_valid(input: string): raw_semver?
+	return try_parse(input) and input or nil
+end
+
 local function is_latest_pre_release(pre_release1: { string }?, pre_release2: { string }?): boolean
+	if not pre_release1 and not pre_release2 then return false end
 	if not pre_release1 then return true end
 	if not pre_release2 then return false end
 
@@ -54,19 +97,7 @@ local function new_from(version: version, patch: partial_version): version
 		build_metadata = if #(patch.build_metadata or {}) > 0 then patch.build_metadata else version.build_metadata,
 	}
 end
-local function try_parse(input: string): version?
-	local captures = pattern:captures(input)
-	if not captures then return end
 
-	local data = destruct_captures(captures, {}, schema)
-	return table.freeze {
-		major = tonumber(data.major) :: never,
-		minor = tonumber(data.minor) :: never,
-		patch = tonumber(data.patch) :: never,
-		pre_release = data.prerelease and string.split(data.prerelease, '.'),
-		build_metadata = data.buildmetadata and string.split(data.buildmetadata, '.'),
-	}
-end
 local function parse(input: string): version
 	return try_parse(input) or error(`couldnt parse version '{input}'`)
 end
@@ -79,6 +110,7 @@ local function is_latest(version1: version, version2: version): boolean
 		elseif version1.patch ~= version2.patch then version1.patch > version2.patch
 		else is_latest_pre_release(version1.pre_release, version2.pre_release)
 end
+
 local function is_oldest(version1: version, version2: version): boolean
 	return not is_latest(version1, version2)
 end
@@ -88,22 +120,6 @@ local function tostring(version: version)
 		.. (if version.pre_release then '-' .. table.concat(version.pre_release, '.') else '')
 		.. (if version.build_metadata then '+' .. table.concat(version.build_metadata, '.') else '')
 end
-
--- types
-export type version = {
-	major: number,
-	minor: number,
-	patch: number,
-	pre_release: { string }?,
-	build_metadata: { string }?,
-}
-export type partial_version = {
-	major: number?,
-	minor: number?,
-	patch: number?,
-	pre_release: { string }?,
-	build_metadata: { string }?,
-}
 
 -- module
 return table.freeze {

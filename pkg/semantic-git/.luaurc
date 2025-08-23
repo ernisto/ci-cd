@@ -1,5 +1,6 @@
 {
     "aliases": {
+        "lpkg": "./luau_packages",
         "pkg": "./lune_packages",
         "config": "./config",
         "utils": "./utils",

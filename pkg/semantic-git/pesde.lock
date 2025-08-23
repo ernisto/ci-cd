@@ -18,6 +18,13 @@ path = "pkg/git"
 [graph."ernisto/git@0.1.0-alpha.9 lune".pkg_ref.dependencies]
 future = [{ name = "lukadev_0/future", version = "^1.0.1", index = "https://github.com/pesde-pkg/index", target = "lune" }, "standard"]
 
+[graph."ernisto/semver@0.1.2 luau"]
+direct = ["semver", { name = "ernisto/semver", version = "^0.1.2", index = "default", target = "luau" }, "standard"]
+
+[graph."ernisto/semver@0.1.2 luau".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/pesde-pkg/index"
+
 [graph."lukadev_0/future@1.0.1 lune".dependencies]
 option = ["lukadev_0/option@1.2.0 lune", "standard"]
 std = ["lukadev_0/std@1.0.1 lune", "standard"]
