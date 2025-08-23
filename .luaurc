@@ -1,13 +1,12 @@
 {
-  "aliases": {
-    "lib": "lib",
-    "lune": "~/.lune/.typedefs/0.9.3/",
-    "pkg": "pkg",
-    "utils": "./utils"
-  },
+  "languageMode": "strict",
   "globals": [
     "warn"
   ],
-  "languageMode": "strict",
-  "lint": {}
+  "aliases": {
+    "lune": "~/.lune/.typedefs/0.10.1/",
+    "utils": "./utils",
+    "lib": "lib",
+    "pkg": "pkg"
+  }
 }

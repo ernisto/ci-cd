@@ -2,5 +2,5 @@
 # It is not intended for manual editing.
 format = 2
 name = "ernisto/semver"
-version = "0.1.1"
-target = "lune"
+version = "0.1.2"
+target = "luau"
