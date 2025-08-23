@@ -1,6 +1,6 @@
 local semantic_commit = require('@lib/commit')
 local version = require('@lib/version')
-local config = require('@config/init')
+local config = require('@config')
 local git = require('@pkg/git')
 
 -- code

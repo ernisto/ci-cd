@@ -1,6 +1,6 @@
 local git = require('@pkg/git')
 local regex = require('@lune/regex')
-local config = require('@config/init')
+local config = require('@config')
 
 local commit_config = config.commits.get_or_create()
 local capture_fields = table.freeze(commit_config.commit.captures)

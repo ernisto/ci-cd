@@ -1,7 +1,6 @@
 local serde = require('@lune/serde')
-local fs = require('@lune/fs')
+local file = require('@utils/file')
 
-local read_or_create = require('@utils/read_or_create')
 local env = require('@config/env')
 local git = require('@pkg/git')
 
@@ -25,12 +24,11 @@ export type field = {
 }
 
 -- defs
-local current_path = string.match(debug.info(1, 's'), '^%[string "(.+)"%]')
-local default_content = fs.readFile(`{current_path}/../semantic-version.yaml`)
+local default_content = file.read_str_asset(`../semantic-version.yaml`)
 
 -- functions
 local function get_or_create(): config
-	local raw = read_or_create('.github/semantic-version.yaml', default_content)
+	local raw = file.read_or_create('.github/semantic-version.yaml', default_content)
 	return serde.decode('yaml', raw)
 end
 local function compute_pre_release(config: config, branch: git.head): { string }?

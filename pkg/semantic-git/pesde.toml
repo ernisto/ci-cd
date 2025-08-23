@@ -21,6 +21,10 @@ environment = "lune"
 lib = "lib/init.luau"
 bin = "cli/init.luau"
 
+[engines]
+pesde = "^0.7.0"
+lune = "^0.10.1"
+
 [indices]
 default = "https://github.com/pesde-pkg/index"
 

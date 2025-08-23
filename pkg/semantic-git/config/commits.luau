@@ -1,14 +1,12 @@
-local read_or_create = require('@utils/read_or_create')
+local file = require('@utils/file')
 local serde = require('@lune/serde')
-local fs = require('@lune/fs')
 
 -- def
-local current_path = string.match(debug.info(1, 's'), '^%[string "(.+)"%]')
-local default_content = fs.readFile(`{current_path}/../semantic-commit.yaml`)
+local default_content = file.read_str_asset(`../semantic-commit.yaml`)
 
 -- functions
 local function get_or_create()
-	local raw = read_or_create('.github/semantic-commit.yaml', default_content)
+	local raw = file.read_or_create('.github/semantic-commit.yaml', default_content)
 	return serde.decode('yaml', raw)
 end
 

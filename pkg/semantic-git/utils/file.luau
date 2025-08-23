@@ -1,7 +1,18 @@
 local fs = require('@lune/fs')
 
--- module
-local function read_or_create(path: string, default_content: string): (string, string?)
+-- defs
+type path = string
+
+-- functions
+local function read_str_asset(path: path): string
+	local caller = debug.info(2, 's')
+	if fs.isFile(caller) then caller:match('(.*)/[^/]+$') end
+
+	local abs_path = `{caller}/{path}`
+	return fs.readFile(abs_path) or error(`asset not found at '{abs_path}'`)
+end
+
+local function read_or_create(path: path, default_content: string): (string, string?)
 	local ancestors = string.split(path, '/')
 	local file_name = table.remove(ancestors) or error(`no path provided`)
 
@@ -26,4 +37,8 @@ local function read_or_create(path: string, default_content: string): (string, s
 	return default_content
 end
 
-return read_or_create
+-- module
+return table.freeze {
+	read_or_create = read_or_create,
+	read_str_asset = read_str_asset,
+}

@@ -1,5 +1,5 @@
 local env = require('@config/env')
-local config = require('@config/init')
+local config = require('@config')
 local fs = require('@lune/fs')
 
 -- init
