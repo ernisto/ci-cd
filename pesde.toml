@@ -9,7 +9,7 @@ workspace_members = ["pkg/*"]
 
 [engines]
 pesde = "^0.7.0"
-lune = "^0.10.1"
+lune = "^0.10.4"
 
 [target]
 environment = "lune"

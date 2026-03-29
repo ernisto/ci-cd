@@ -4,7 +4,7 @@
     "warn"
   ],
   "aliases": {
-    "lune": "~/.lune/.typedefs/0.10.1/",
+    "lune": "~/.lune/.typedefs/0.10.4/",
     "utils": "./utils",
     "lib": "lib",
     "pkg": "pkg"
