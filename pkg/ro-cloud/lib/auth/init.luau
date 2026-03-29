@@ -12,7 +12,8 @@ export type api_session = api.session
 
 -- defs
 export type session = oauth_session | user_session | api_session
-export type json = number | boolean | string | { json } | json_object
+export type cloud_session = api_session | oauth_session
+export type json = number | boolean | string | { json } | json_object?
 export type json_object = { [string]: json }
 
 -- functions
@@ -21,17 +22,20 @@ local function request(
 	path: string,
 	method: net.HttpMethod,
 	content_type: string,
-	data: string | buffer
-): string
+	data: string | buffer?
+)
 	return if (session :: any).api_key
 		then api.request(session :: any, path, method, content_type, data)
 		elseif (session :: any).cookie then user.request(session :: any, path, method, content_type, data)
 		else oauth.request(session :: any, path, method, content_type, data)
 end
 
-local function request_json(session: session, path: string, method: net.HttpMethod, data: json_object): json_object
-	local response_body = request(session, path, method, serde.encode('json', data), 'application/json')
-	return serde.decode('json', response_body)
+local function request_json(session: session, path: string, method: net.HttpMethod, data: json_object?): json_object
+	local response = request(session, path, method, 'application/json', data and serde.encode('json', data))
+	local body = serde.decode('json', response.body)
+
+	assert(response.ok, `Request fail [{response.statusCode}]: {response.statusMessage}\n{body and body.message or ''}`)
+	return body
 end
 
 -- module

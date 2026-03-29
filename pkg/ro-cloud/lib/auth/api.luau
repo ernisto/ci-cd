@@ -17,9 +17,9 @@ local function request(
 	path: string,
 	method: net.HttpMethod,
 	content_type: string, -- unknown
-	data: string | buffer
-): string
-	local response = net.request({
+	data: string | buffer?
+)
+	return net.request({
 		url = API_ENDPOINT .. path,
 		method = method,
 		body = data,
@@ -28,8 +28,6 @@ local function request(
 			['x-api-key'] = session.api_key,
 		},
 	})
-	assert(response.ok and response.statusCode == 200, `HTTP [{response.statusCode}]: {response.statusMessage}`)
-	return response.body
 end
 
 -- module

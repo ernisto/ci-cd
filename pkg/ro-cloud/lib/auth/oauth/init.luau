@@ -97,16 +97,9 @@ local function is_session_expired(session: session): boolean
 end
 
 -- methods
-local function request(
-	session: session,
-	path: string,
-	method: net.HttpMethod,
-	content_type: string?,
-	body: string?
-): string
+local function request(session: session, path: string, method: net.HttpMethod, content_type: string?, body: string?)
 	assert(not is_session_expired(session), 'Session has expired. Please refresh the token.')
-
-	local response = net.request({
+	return net.request({
 		url = API_ENDPOINT .. path,
 		method = method,
 		headers = {
@@ -115,13 +108,6 @@ local function request(
 		},
 		body = body,
 	})
-
-	if not response.ok then
-		assert(response.statusCode ~= 401, 'Unauthorized. Token may be invalid or expired.')
-		error(`Request failed: {response.statusCode}:\n{response.statusMessage}`)
-	end
-
-	return response.body
 end
 
 -- module

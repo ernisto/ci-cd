@@ -3,7 +3,7 @@ local auth = require('@lib/auth')
 type json = auth.json
 
 -- defs
-local BASE_OPERATION_URL = 'https://apis.roblox.com/cloud/v2/'
+local BASE_OPERATION_URL = 'cloud/v2/'
 
 export type operation<Result, Metadata> = pending_operation | done_operation<Result, Metadata>
 export type pending_operation = {
@@ -34,7 +34,7 @@ local function poll_for_result<Result, Metadata>(session: auth.session, operatio
 		retry_polling_delay *= retry_polling_multiplier
 
 		if not success then warn(operation) end
-		if operation.done then return operation end
+		if operation.state ~= 'PROCESSING' then return operation end
 	end
 	return
 end
