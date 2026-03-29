@@ -14,6 +14,7 @@ local matcher = regex.new(table.concat({
 	'(?<parents>(?:parent \\S+\n)*)',
 	'(?:author (?<author_name>\\S+) (?<author_email><\\S+?>) (?<timestamp>\\S+) (\\-?(?<timezone_hour>\\d\\d)(?<timezone_minute>\\d\\d))\n)?',
 	'(?:committer (?<committer_name>\\S+) (?<committer_email><\\S+?>) \\S+ \\S+\n)',
+	'(?:change-id \\S+\n)',
 	'\n?(?<message>(?<title>[^\n]+)\n(?<body>[\\s\\S]+)?)',
 }))
 local schema = {
