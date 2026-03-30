@@ -1,38 +1,24 @@
 local serde = require('@lune/serde')
 local auth = require('@lib/auth')
 
--- defs
-export type place = {
-	path: string,
-	displayName: string,
-	description: string,
-	serverSize: number,
-}
-export type place_output = place & {
-	createTime: string,
-	updateTime: string,
-}
-
 -- functions
+type subject = { universe_id: number, place_id: number }
 type result = { versionNumber: number }
-local function publish(
-	session: auth.session,
-	universe_id: number,
-	place_id: number,
-	raw_place_file: buffer,
-	do_publish: boolean?
-): result
-	local json = auth.request(
+
+local function upload(session: auth.cloud_session, subject: subject, file: buffer, do_publish: boolean?): result
+	local res = auth.request(
 		session,
-		`universes/v1/{universe_id}/places/{place_id}/versions?versionType={if do_publish then 'Published' else 'Saved'}`,
+		`universes/v1/{subject.universe_id}/places/{subject.place_id}/versions?versionType={if do_publish
+			then 'Published'
+			else 'Saved'}`,
 		'POST',
 		'application/octet-stream',
-		raw_place_file
+		file
 	)
-	return serde.decode('json', json)
+	return serde.decode('json', res.body)
 end
 
 -- module
 return table.freeze {
-	publish = publish,
+	upload = upload,
 }

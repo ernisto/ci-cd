@@ -46,11 +46,11 @@ type flat_query = {
 }
 
 type list = list_flat & list_structured
-type list_flat = (session: auth.session, task_path: string, query: flat_query) -> response_flat
-type list_structured = (session: auth.session, task_path: string, query: structured_query) -> response_structured
+type list_flat = (session: auth.cloud_session, path: string, query: flat_query) -> response_flat
+type list_structured = (session: auth.cloud_session, path: string, query: structured_query) -> response_structured
 
-local function list(session: auth.session, task_path: string, query: query): response
-	return auth.request_json(session, `cloud/v2/{task_path}/logs`, 'GET', query :: any) :: any
+local function list(session: auth.cloud_session, path: string, query: query): response
+	return auth.request_json(session, `cloud/v2/{path}/logs`, 'GET', query :: any) :: any
 end
 
 -- module

@@ -8,15 +8,11 @@ local BASE_OPERATION_URL = 'cloud/v2/'
 export type operation<Result, Metadata> = pending_operation | done_operation<Result, Metadata>
 export type pending_operation = {
 	path: string, -- The endpoint path to call to poll for the request's completion. Append the path to the original base URL of the resource method.
-	done: false,
-	response: nil,
-	metadata: nil,
+	state: 'PROCESSING',
 }
 export type done_operation<Result = json, Metadata = json> = {
 	path: string,
-	done: true,
-	response: Result,
-	metadata: Metadata,
+	state: string,
 }
 
 -- functions
