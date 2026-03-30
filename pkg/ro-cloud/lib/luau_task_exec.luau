@@ -1,5 +1,5 @@
 local auth = require('@lib/auth')
-local operation = require('@lib/v2/operation')
+local operation = require('@lib/operation')
 
 type json = auth.json
 

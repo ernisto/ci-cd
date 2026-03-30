@@ -48,25 +48,24 @@ local changelog_env = semantic_git.placeholder_env:extends {
 semantic_git.changelog.write(changelog_env, 'CHANGELOG.md')
 
 -- publish
-local universe =
-	rocloud.universe.place.upload(session, { universe_id = universe_id, place_id = place_id }, raw_place_file)
+local universe = rocloud.place.upload(session, { universe_id = universe_id, place_id = place_id }, raw_place_file)
 print(universe)
 
 -- run unit tests
-local task_session = rocloud.luau.task.create(
+local task_session = rocloud.luau_task_exec.create(
 	session,
 	{ universe_id = universe_id, place_id = place_id, version = universe.versionNumber },
 	{ script = 'print("starting"); task.wait(5); print("done")' }
 )
 print('started task', task_session)
 
-local task_log = rocloud.luau.task_log.list(session, task_session.path, { view = 'FLAT', max_page_size = 100 })
+local task_log = rocloud.luau_task_exec_log.list(session, task_session.path, { view = 'FLAT', max_page_size = 100 })
 print('task logs', task_log)
 
-local done_task = rocloud.luau.task.wait_for_task(session, task_session.path)
+local done_task = rocloud.luau_task_exec.wait_for_task(session, task_session.path)
 print('task done', done_task)
 
-local done_task_log = rocloud.luau.task_log.list(session, task_session.path, { max_page_size = 100 })
+local done_task_log = rocloud.luau_task_exec_log.list(session, task_session.path, { max_page_size = 100 })
 print('task logs', done_task_log)
 
 print('new_version', semver.tostring(new_version or prev_version), new_version or prev_version)
